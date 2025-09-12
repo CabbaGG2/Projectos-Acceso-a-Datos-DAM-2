@@ -8,7 +8,7 @@ public class Main {
         String rutaRealDirectorio = "/Users/nombre_usuario";
         String rutaRealFichero = "/Users/home/dam/primerScript.py";
 
-        String resultado1 = esDirectorio(rutaRealFichero);
+        String resultado1 = esDirectorio(rutaRealDirectorio);
         System.out.println(resultado1);
 
         String resultado2 = esFichero(rutaRealFichero);
@@ -45,5 +45,15 @@ public class Main {
         }
     }
 
+    public static void crearDirectorio(String ruta) {
+        File directorio = new File (ruta);
+
+        if (directorio.exists() || !directorio.isDirectory()) {
+            System.out.println("No se ha creado el repositorio porque existe o ingresaron un formato que no es directorio.");
+        } else {
+            return directorio.mkdirs();
+            System.out.printf("Se ha creado el directorio con exito.");
+        }
+    }
 
 }
