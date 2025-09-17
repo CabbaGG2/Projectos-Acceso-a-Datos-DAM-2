@@ -10,7 +10,7 @@ public class Main {
         String rutaRealFichero = "/home/dam/primerScript.py";
         String rutaFalsaFichero = "/home/dam/programa.py";
         String rutaCrearDirectorio = "/home/dam/Escritorio/practica";
-        String rutaDirectorioFalso = "/home/dam/Escritorio";
+        String rutaDirectorioFalso = "/home/dam/Escritorio/";
         String nombreArchivo = "practica.txt";
         String nombreArchivo1 = "practica2.txt";
 
@@ -39,6 +39,8 @@ public class Main {
         modificarSoloLectura(rutaDirectorioFalso,nombreArchivo);
 
         modificarLectura(rutaDirectorioFalso,nombreArchivo);
+
+        borrarFichero(rutaDirectorioFalso,nombreArchivo);
     }
 
     /**
