@@ -10,7 +10,9 @@ public class Main {
         String rutaRealFichero = "/home/dam/primerScript.py";
         String rutaFalsaFichero = "/home/dam/programa.py";
         String rutaCrearDirectorio = "/home/dam/Escritorio/practica";
-        String rutaFicheroFalso = "/home/dam/Escritorio";
+        String rutaDirectorioFalso = "/home/dam/Escritorio";
+        String nombreArchivo = "practica.txt";
+        String nombreArchivo1 = "practica2.txt";
 
         String resultado1 = esDirectorio(rutaRealDirectorio);
         System.out.println(resultado1);
@@ -22,7 +24,21 @@ public class Main {
         //crearDirectorio(rutaRealDirectorio);
         crearDirectorio(rutaCrearDirectorio);
 
-        crearFichero(rutaFicheroFalso);
+        /*
+        try {
+            crearFichero(rutaDirectorioFalso,nombreArchivo);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        */
+        modoAcceso(rutaDirectorioFalso,nombreArchivo1);
+        modoAcceso(rutaDirectorioFalso, nombreArchivo);
+
+        calcularLongitud(rutaDirectorioFalso,nombreArchivo);
+
+        modificarSoloLectura(rutaDirectorioFalso,nombreArchivo);
+
+        modificarLectura(rutaDirectorioFalso,nombreArchivo);
     }
 
     /**
@@ -88,4 +104,82 @@ public class Main {
         }
     }
 
+    public static void modoAcceso(String nombreDir, String nombreArchivo) {
+        File dir = new File(nombreDir);
+        File archivo = new File(dir, nombreArchivo);
+
+        if (dir.isDirectory() && dir.exists()) {
+            if(archivo.exists() && archivo.isFile()) {
+                String mensajeLectura = (archivo.canRead()) ? "Se puede leer" : "No se puede leer";
+                System.out.println(mensajeLectura);
+                String mensajeEscritura = (archivo.canWrite()) ? "Se puede escribir" : "No se puede escribir";
+                System.out.println(mensajeEscritura);
+            }else{
+                System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
+            }
+        } else {
+            System.out.println("La ruta: " + nombreDir + " no es un directorio");
+        }
+
+    }
+
+    public static void calcularLongitud(String nombreDirectorio, String nombreArchivo) {
+        File dir = new File(nombreDirectorio);
+        File archivo = new File(dir, nombreArchivo);
+
+        if (dir.isDirectory() && dir.exists()) {
+            if(archivo.exists() && archivo.isFile()) {
+                System.out.println("El tamaño del archivo " + nombreArchivo + " en Bites es: " + archivo.length());
+            }else{
+                System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
+            }
+        } else {
+            System.out.println("La ruta: " + nombreDirectorio + " no es un directorio");
+        }
+    }
+
+    public static void modificarSoloLectura(String nombreDirectorio, String nombreArchivo) {
+        File dir = new File(nombreDirectorio);
+        File archivo = new File(dir, nombreArchivo);
+
+        if (dir.isDirectory() && dir.exists()) {
+            if(archivo.exists() && archivo.isFile()) {
+                archivo.setReadOnly();
+                System.out.println("El archivo " + nombreArchivo + " se modifico a SoloLectura con éxito");
+            }else{
+                System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
+            }
+        } else {
+            System.out.println("La ruta: " + nombreDirectorio + " no es un directorio");
+        }
+    }
+
+    public static void modificarLectura(String nombreDirectorio, String nombreArchivo) {
+        File dir = new File(nombreDirectorio);
+        File archivo = new File(dir, nombreArchivo);
+
+        if (dir.isDirectory() && dir.exists()) {
+            if(archivo.exists() && archivo.isFile()) {
+                archivo.setWritable(true);
+                System.out.println("Los permisos de escritura del archivo: " + nombreArchivo + " se modificaron con éxito.");
+            }else{
+                System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
+            }
+        } else {
+            System.out.println("La ruta: " + nombreDirectorio + " no es un directorio");
+        }
+    }
+
+    public static void borrarFichero(String nombreDirectorio, String nombreArchivo) {
+
+        File archivo = new File(nombreDirectorio+nombreArchivo);
+
+        if(archivo.exists() && archivo.isFile()) {
+                archivo.delete();
+                System.out.println("Los permisos de escritura del archivo: " + nombreArchivo + " se modificaron con éxito.");
+        }else{
+                System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
+        }
+
+    }
 }
