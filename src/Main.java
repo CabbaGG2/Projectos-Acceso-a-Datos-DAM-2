@@ -10,10 +10,9 @@ public class Main {
         String rutaRealFichero = "/home/dam/primerScript.py";
         String rutaFalsaFichero = "/home/dam/programa.py";
         String rutaCrearDirectorio = "/home/dam/Escritorio/practica";
-        String rutaDirectorioFalso = "/home/dam/Escritorio/";
+        String rutaDirectorioFalso = "/home/dam/Escritorio";
         String nombreArchivo = "practica.txt";
         String nombreArchivo1 = "practica2.txt";
-        String rutaCarpetaImagenes = "/home/dam/Imágenes";
 
         String resultado1 = esDirectorio(rutaRealDirectorio);
         System.out.println(resultado1);
@@ -25,13 +24,13 @@ public class Main {
         //crearDirectorio(rutaRealDirectorio);
         crearDirectorio(rutaCrearDirectorio);
 
-
+        /*
         try {
             crearFichero(rutaDirectorioFalso,nombreArchivo);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        */
         modoAcceso(rutaDirectorioFalso,nombreArchivo1);
         modoAcceso(rutaDirectorioFalso, nombreArchivo);
 
@@ -39,13 +38,7 @@ public class Main {
 
         modificarSoloLectura(rutaDirectorioFalso,nombreArchivo);
 
-        modificarEscritura(rutaDirectorioFalso,nombreArchivo);
-
-        borrarFichero(rutaDirectorioFalso,nombreArchivo);
-
-        borrarDirectorio(rutaCrearDirectorio);
-
-        mostrarContenidoRuta(rutaCarpetaImagenes, 0);
+        modificarLectura(rutaDirectorioFalso,nombreArchivo);
     }
 
     /**
@@ -161,7 +154,7 @@ public class Main {
         }
     }
 
-    public static void modificarEscritura(String nombreDirectorio, String nombreArchivo) {
+    public static void modificarLectura(String nombreDirectorio, String nombreArchivo) {
         File dir = new File(nombreDirectorio);
         File archivo = new File(dir, nombreArchivo);
 
@@ -183,56 +176,10 @@ public class Main {
 
         if(archivo.exists() && archivo.isFile()) {
                 archivo.delete();
-                System.out.println("El archivo: " + nombreArchivo + " se ha borrado con éxito.");
+                System.out.println("Los permisos de escritura del archivo: " + nombreArchivo + " se modificaron con éxito.");
         }else{
                 System.out.println("El archivo " + nombreArchivo + " no existe en el directorio");
         }
 
     }
-
-    public static void borrarDirectorio(String nombreDirectorio) {
-
-        File archivo = new File(nombreDirectorio);
-
-        if(archivo.exists() && archivo.isDirectory()) {
-            archivo.delete();
-            System.out.println("El Directorio: " + nombreDirectorio + " se ha borrado con éxito.");
-        }else{
-            System.out.println("El Directorio " + nombreDirectorio + " no existe o tiene descendencia.");
-        }
-
-    }
-
-    public static void mostrarContenidoRuta(String ruta,int nivel) {
-
-        File directorio = new File(ruta);
-
-        File[] lista = directorio.listFiles();
-
-        if (directorio.exists() && directorio.isDirectory()) {
-
-            for (File elemento : lista) {
-                if (elemento.isDirectory()) {
-                    System.out.println(generarSangria(nivel) + "directorio: " + elemento.getName());
-                    System.out.println("-----------");
-                    System.out.println(nivel);
-                    mostrarContenidoRuta(elemento.toString(), nivel++);
-                } else {
-                    System.out.println(generarSangria(nivel) + "fichero: " + elemento.getName());
-                    System.out.println("-----------");
-                }
-            }
-        } else {
-            System.out.println("El Directorio " + ruta + " no existe o no es directorio.");
-        }
-    }
-    public static String generarSangria(int nivel) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < nivel; i++) {
-                sb.append("\t");
-        }
-        return sb.toString();
-    }
-
 }
-
