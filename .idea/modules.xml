@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Practica2I_O_Stream/Practica2I_O_Stream.iml" filepath="$PROJECT_DIR$/Practica2I_O_Stream/Practica2I_O_Stream.iml" />
       <module fileurl="file://$PROJECT_DIR$/practica1-AD.iml" filepath="$PROJECT_DIR$/practica1-AD.iml" />
     </modules>
   </component>
